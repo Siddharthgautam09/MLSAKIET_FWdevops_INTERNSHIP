@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      font-family: Arial, sans-serif;
+    }
+
+    .calculator-container {
+      text-align: center;
+      color: #444;
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .calculator {
+      width: 260px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    #display {
+      width: 100%;
+      height: 50px;
+      text-align: right;
+      padding: 10px;
+      font-size: 1.5em;
+      border: none;
+      outline: none;
+      background: #f3f4f6;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      font-size: 1.2em;
+      padding: 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      outline: none;
+      transition: background-color 0.3s;
+    }
+
+    button:nth-child(4n+1) { background-color: #f77f00; color: white; }
+    button:nth-child(4n+2) { background-color: #f4a261; color: white; }
+    button:nth-child(4n+3) { background-color: #2a9d8f; color: white; }
+    button:nth-child(4n+4) { background-color: #264653; color: white; }
+    
+    button:hover {
+      filter: brightness(1.1);
+    }
+
+    .equal-button {
+      grid-column: span 2;
+      background-color: #e76f51;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator-container">
+    <h1>Simple Calculator</h1>
+    <div class="calculator">
+      <input type="text" id="display" disabled />
+      <div class="buttons">
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="deleteLast()">DEL</button>
+        <button onclick="appendCharacter('/')">/</button>
+        <button onclick="appendCharacter('*')">*</button>
+
+        <button onclick="appendCharacter('7')">7</button>
+        <button onclick="appendCharacter('8')">8</button>
+        <button onclick="appendCharacter('9')">9</button>
+        <button onclick="appendCharacter('-')">-</button>
+
+        <button onclick="appendCharacter('4')">4</button>
+        <button onclick="appendCharacter('5')">5</button>
+        <button onclick="appendCharacter('6')">6</button>
+        <button onclick="appendCharacter('+')">+</button>
+
+        <button onclick="appendCharacter('1')">1</button>
+        <button onclick="appendCharacter('2')">2</button>
+        <button onclick="appendCharacter('3')">3</button>
+        <button class="equal-button" onclick="calculateResult()">=</button>
+
+        <button onclick="appendCharacter('0')">0</button>
+        <button onclick="appendCharacter('.')">.</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    // JavaScript functions
+    let display = document.getElementById("display");
+
+    function appendCharacter(char) {
+      display.value += char;
+    }
+
+    function clearDisplay() {
+      display.value = "";
+    }
+
+    function deleteLast() {
+      display.value = display.value.slice(0, -1);
+    }
+
+    function calculateResult() {
+      try {
+        display.value = eval(display.value);
+      } catch {
+        display.value = "Error";
+      }
+    }
+  </script>
+</body>
+</html>
